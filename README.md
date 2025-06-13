@@ -1,10 +1,16 @@
-PKHeX
+KPHeX
 =====
 <div>
   <span>English</span> / <a href=".github/README-es.md">Español</a> / <a href=".github/README-fr.md">Français</a> / <a href=".github/README-de.md">Deutsch</a> / <a href=".github/README-it.md">Italiano</a> / <a href=".github/README-zh-Hant.md">繁體中文</a> / <a href=".github/README-zh-Hans.md">简体中文</a>
 </div>
 
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+
+Fork of [PKHeX](https://github.com/kwsch/PKHeX) that allows overriding the included game data binaries.
+Makes it easier to adapt to decomp hacks.
+**Note: Only the API works with custom binaries, the UI will not run if any binaries are overridden**
+
+To override a binary, set an environment variable named "PKHEX_RESOURCE_OVERRIDE_{filename}" and set the value to the full path to the custom binary.
 
 Pokémon core series save editor, programmed in [C#](https://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29).
 
