@@ -56,7 +56,12 @@ public sealed class EmbeddedResourceCache
         if (!ResourceNameMap.TryGetValue(name.ToLowerInvariant(), out result))
             return false;
 
-        using var resource = Assembly.GetManifestResourceStream(result);
+        bool overridden = ResourceOverrideUtil.TryGetOverrideStream(name.ToLowerInvariant(), out Stream? overrideRes);
+
+        using var resource = (overridden)
+            ? overrideRes
+            : Assembly.GetManifestResourceStream(result);
+
         if (resource is null)
             return false;
         using var reader = new StreamReader(resource);
@@ -73,7 +78,12 @@ public sealed class EmbeddedResourceCache
         if (!ResourceNameMap.TryGetValue(name, out var resName))
             return false;
 
-        using var resource = Assembly.GetManifestResourceStream(resName);
+        bool overridden = ResourceOverrideUtil.TryGetOverrideStream(name.ToLowerInvariant(), out Stream? overrideRes);
+
+        using var resource = (overridden)
+            ? overrideRes
+            : Assembly.GetManifestResourceStream(resName);
+
         if (resource is null)
             return false;
 
@@ -92,7 +102,12 @@ public sealed class EmbeddedResourceCache
         if (!ResourceNameMap.TryGetValue(name, out var resName))
             return false;
 
-        using var resource = Assembly.GetManifestResourceStream(resName);
+        bool overridden = ResourceOverrideUtil.TryGetOverrideStream(name.ToLowerInvariant(), out Stream? overrideRes);
+
+        using var resource = (overridden)
+            ? overrideRes
+            : Assembly.GetManifestResourceStream(resName);
+
         if (resource is null)
             return false;
 

@@ -26,23 +26,28 @@ public static class MoveInfo
     /// <summary>
     /// Gets the move PP table for the <see cref="context"/>.
     /// </summary>
-    public static ReadOnlySpan<byte> GetPPTable(EntityContext context) => context switch
+    public static ReadOnlySpan<byte> GetPPTable(EntityContext context)
     {
-        Gen1 => MoveInfo1.PP,
-        Gen2 => MoveInfo2.PP,
-        Gen3 => MoveInfo3.PP,
-        Gen4 => MoveInfo4.PP,
-        Gen5 => MoveInfo5.PP,
-        Gen6 => MoveInfo6.PP,
-        Gen7 => MoveInfo7.PP,
-        Gen8 => MoveInfo8.PP,
-        Gen9 => MoveInfo9.PP,
+        string id = context switch
+        {
+            Gen1 => "g1",
+            Gen2 => "g2",
+            Gen3 => "g3",
+            Gen4 => "g4",
+            Gen5 => "g5",
+            Gen6 => "g6",
+            Gen7 => "g7",
+            Gen8 => "g8",
+            Gen9 => "g9",
 
-        Gen7b => MoveInfo7b.PP,
-        Gen8a => MoveInfo8a.PP,
-        Gen8b => MoveInfo8.PP,
-        _ => throw new ArgumentOutOfRangeException(nameof(context)),
-    };
+            Gen7b => "7b",
+            Gen8a => "8a",
+            Gen8b => "g8",
+            _ => throw new ArgumentOutOfRangeException(nameof(context)),
+        };
+
+        return Util.GetBinaryResource($"movepp_{id}");
+    }
 
     /// <summary>
     /// Gets a collection that can be used to check if a move cannot be used in battle.
